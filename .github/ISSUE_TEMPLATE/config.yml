@@ -1,0 +1,7 @@
+contact_links:
+  - name: Join nf-core
+    url: https://nf-co.re/join
+    about: Please join the nf-core community here
+  - name: "Slack #tiara_fcsgx_analysis channel"
+    url: https://nfcore.slack.com/channels/tiara_fcsgx_analysis
+    about: Discussion about the sanger-tol/tiara_fcsgx_analysis pipeline
