@@ -28,7 +28,11 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_tiar
 workflow SANGERTOL_TIARA_FCSGX_ANALYSIS {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    fasta
+    taxid
+    fcsgx_database
+    ch_ncbi_path
+    outdir
 
     main:
 
@@ -36,8 +40,11 @@ workflow SANGERTOL_TIARA_FCSGX_ANALYSIS {
     // WORKFLOW: Run pipeline
     //
     TIARA_FCSGX_ANALYSIS (
-        samplesheet,
-        params.outdir,
+        fasta,
+        taxid,
+        fcsgx_database,
+        ch_ncbi_path,
+        outdir
     )
 }
 /*
@@ -58,18 +65,26 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input,
+        params.fasta,
         params.help,
         params.help_full,
         params.show_hidden
     )
 
+
     //
     // WORKFLOW: Run main workflow
     //
     SANGERTOL_TIARA_FCSGX_ANALYSIS (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.reference,
+        params.taxid,
+        params.fcs_gx_database_path,
+        params.ncbi_ranked_lineage_path,
+        params.outdir
+
     )
+
+
     //
     // SUBWORKFLOW: Run completion tasks
     //
