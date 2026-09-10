@@ -26,7 +26,7 @@
                     "fa_icon": "fas fa-tag"
                 },
                 "taxid": {
-                    "type": "string",
+                    "type": "integer",
                     "description": "NCBI Taxonomy ID for the sample.",
                     "fa_icon": "fas fa-tag"
                 },
@@ -38,7 +38,7 @@
                 },
                 "ncbi_ranked_lineage_path": {
                     "type": "string",
-                    "format": "directory-path",
+                    "format": "path",
                     "description": "Path to the ranked lineage database file (rankedlineage.dmp).",
                     "fa_icon": "fas fa-folder-open"
                 },

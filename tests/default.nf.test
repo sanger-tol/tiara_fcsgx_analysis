@@ -3,12 +3,80 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     tag "pipeline"
+    config "../conf/test.config"
 
     test("-profile test") {
 
+        setup {
+            // Databases: FCS DATABASE
+            def fcs_database = [
+                "FCS1" : [
+                    "FILE": "test-only.taxa.tsv",
+                    "OUT" : "all.taxa.tsv"
+                ],
+                "FCS2" : [
+                    "FILE": "test-only.gxi",
+                    "OUT": "all.gxi"
+                ],
+                "FCS3" : [
+                    "FILE": "test-only.gxs",
+                    "OUT": "all.gxs"
+                ],
+                "FCS4" : [
+                    "FILE": "test-only.meta.jsonl",
+                    "OUT": "all.meta.jsonl"
+                ],
+                "FCS5" : [
+                    "FILE": "test-only.blast_div.tsv.gz",
+                    "OUT": "all.blast_div.tsv.gz"
+                ]
+            ]
+
+            new File("${launchDir}/FCS_gx").mkdir()
+
+            for (String dbKey : fcs_database.keySet()) {
+                def db = fcs_database.get(dbKey)
+
+                println "\nFCS DL START: ${db['FILE']}..."
+                def command1 = ['bash', '-c', "wget -cq https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/FCS/database/test-only/${db['FILE']} -O ${launchDir}/FCS_gx/${db['OUT']}"]
+                def process1 = command1.execute()
+                process1.waitFor()
+
+                if (process1.exitValue() != 0) {
+                    throw new RuntimeException("Error - failed to download ${dbKey}: ${process1.err.text}")
+                }
+
+                println "FCS DL END: ${db['FILE']}..."
+            }
+
+
+            // Databases: NCBI Taxonomy - rankedlineage.dmp
+
+            new File("${launchDir}/NCBI_TAXONOMY").mkdir()
+            println "NCBI DL: Starting"
+
+            def ncbi_dl_cmd = "curl -L --retry 5 --retry-delay 10 https://ftp.ncbi.nih.gov/pub/taxonomy/new_taxdump/new_taxdump.tar.gz --output ${launchDir}/new_taxdump.tar.gz && tar -C ${launchDir}/NCBI_TAXONOMY -xzf ${launchDir}/new_taxdump.tar.gz"
+            def command2 = ['bash', '-c', "${ncbi_dl_cmd}"]
+            def process2 = command2.execute()
+            process2.waitFor()
+
+            if (process2.exitValue() != 0) {
+                throw new RuntimeException("Error - failed to download ${dbKey}: ${process2.err.text}")
+            }
+
+            println "NCBI DL: Done"
+
+        }
+
         when {
             params {
-                outdir = "$outputDir"
+
+                sample                          = "Meles_meles"
+                fasta                           = "https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta"
+                taxid                           = 9662
+                fcs_gx_database_path            = "${launchDir}/FCS_gx/"
+                ncbi_ranked_lineage_path        = "${launchDir}/NCBI_TAXONOMY/rankedlineage.dmp"
+                outdir                          = "$outputDir"
             }
         }
 
@@ -21,7 +89,7 @@ nextflow_pipeline {
             assertAll(
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/tiara_fcsgx_analysis_software_mqc_versions.yml"),
+                    removeNextflowVersion("$outputDir/pipeline_info/tiara_fcsgx_analysis_software_versions.yml"),
                     // All stable path name, with a relative path
                     stable_path,
                     // All files with stable contents

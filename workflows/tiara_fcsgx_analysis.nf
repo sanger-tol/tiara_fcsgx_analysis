@@ -42,10 +42,17 @@ workflow TIARA_FCSGX_ANALYSIS {
     )
 
 
+    //
+    // MODULE: RUN TIARA FOR SEQUENCE CLASSIFICATION
+    //
     TIARA_TIARA (
         FASTA_CLEAN_FAIDX.out.reference
     )
 
+
+    //
+    // SUBWORKFLOW: RUN FCSGX AND PARSE INTO CSV
+    //
     reference_taxid = FASTA_CLEAN_FAIDX.out.reference
         .map { meta, ref ->
             def new_meta = meta + [ taxid: val_taxid ]
@@ -59,6 +66,9 @@ workflow TIARA_FCSGX_ANALYSIS {
     )
 
 
+    //
+    // SUBWORKFLOW: GENERATE TIARA/FCSGX JOINT REPORT
+    //
     AUTOFILTER_AUTOFILTER (
         FASTA_CLEAN_FAIDX.out.fai,
         TIARA_TIARA.out.classifications,
@@ -66,6 +76,7 @@ workflow TIARA_FCSGX_ANALYSIS {
         val_taxid,
         ch_ncbi_path
     )
+
 
     //
     // Collate and save software versions
