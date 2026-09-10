@@ -1,0 +1,84 @@
+{
+    "-profile test": {
+        "content": [
+            {
+                "AUTOFILTER_AUTOFILTER": {
+                    "autofilter": "1.1.0",
+                    "python": "3.14.3"
+                },
+                "FCSGX_PARSERESULTS": {
+                    "parse_fcsgx_result": "1.1.0",
+                    "python": "3.14.3"
+                },
+                "FCSGX_RUNGX": {
+                    "fcsgx": "0.5.5"
+                },
+                "SAMTOOLS_DICT": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.24
+                },
+                "SEQKIT_DOTS": {
+                    "seqkit": "2.13.0"
+                },
+                "SEQKIT_SEQ": {
+                    "seqkit": "2.13.0"
+                },
+                "TIARA_TIARA": {
+                    "tiara": "1.0.3"
+                },
+                "Workflow": {
+                    "sanger-tol/tiara_fcsgx_analysis": "v0.1.0dev"
+                }
+            },
+            [
+                "autofilter",
+                "autofilter/Meles_meles_ABNORMAL_CHECK.csv",
+                "autofilter/Meles_meles_autofiltered.txt",
+                "autofilter/Meles_meles_removed_scaffolds.txt",
+                "fcsgx",
+                "fcsgx/Meles_meles.fcs_gx_report.txt",
+                "fcsgx/Meles_meles.summary.txt",
+                "fcsgx/Meles_meles.taxonomy.rpt",
+                "fcsgx/Meles_meles_parsed_fcsgx.csv",
+                "genome",
+                "genome/Meles_meles.json",
+                "pipeline_info",
+                "pipeline_info/tiara_fcsgx_analysis_software_versions.yml",
+                "samtools",
+                "samtools/Meles_meles_dots.fasta.dict",
+                "samtools/Meles_meles_dots.fasta.fai",
+                "samtools/Meles_meles_dots.fasta.sizes",
+                "seqkit",
+                "seqkit/Meles_meles.fasta",
+                "seqkit/Meles_meles_dots.fasta",
+                "tiara",
+                "tiara/Meles_meles.txt",
+                "tiara/log_Meles_meles.txt"
+            ],
+            [
+                "Meles_meles_ABNORMAL_CHECK.csv:md5,5598040b3650247c30302eeca194c563",
+                "Meles_meles_autofiltered.txt:md5,8674a2b03ed705ee0f3cd184e4241590",
+                "Meles_meles_removed_scaffolds.txt:md5,68b329da9893e34099c7d8ad5cb9c940",
+                "Meles_meles.fcs_gx_report.txt:md5,20bf56ab45ef895d1c808f2689c2dc39",
+                "Meles_meles.summary.txt:md5,8cdf5410abd6258684f8563b9ef70db5",
+                "Meles_meles.taxonomy.rpt:md5,68ad4ebd580e1c622ab0376b6017cf9c",
+                "Meles_meles_parsed_fcsgx.csv:md5,657503227a9f3bb03e372abdd55b79b4",
+                "Meles_meles.json:md5,2e3bc3e87fdf61f988093b26280d7f4e",
+                "Meles_meles_dots.fasta.dict:md5,c7fe6ab3890b3f5c8d60408f00d5fd40",
+                "Meles_meles_dots.fasta.fai:md5,14f65ea617d7f714e88415ab69c16923",
+                "Meles_meles_dots.fasta.sizes:md5,a48b05cfa0feac44240ce45398aa3beb",
+                "Meles_meles.fasta:md5,608d5d74e61e0b84a2a743a7160e64db",
+                "Meles_meles_dots.fasta:md5,bf642f7641c302fdca1f13626c1e58b3",
+                "Meles_meles.txt:md5,9e2a5a00eb12cdfaa54cc555e1a929f2",
+                "log_Meles_meles.txt:md5,ded6e0ea57c26142364f73054ea73a3a"
+            ]
+        ],
+        "timestamp": "2026-09-10T15:57:44.088553843",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
+    }
+}
