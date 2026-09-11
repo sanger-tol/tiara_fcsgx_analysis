@@ -107,7 +107,24 @@ workflow TIARA_FCSGX_ANALYSIS {
             newLine: true
         )
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    index               = FASTA_CLEAN_FAIDX.out.fai
+    sizes               = FASTA_CLEAN_FAIDX.out.sizes
+    fasta               = FASTA_CLEAN_FAIDX.out.reference
+    seq_desc            = FASTA_CLEAN_FAIDX.out.sequence_description
+
+    classifications     = TIARA_TIARA.out.classifications
+    tiara_logs          = TIARA_TIARA.out.log
+
+    fcs_results         = FCSGX_PARSECSV.out.fcsgxresult
+    fcs_genomedict      = FCSGX_PARSECSV.out.genomedict
+    fcs_report_txt      = FCSGX_PARSECSV.out.fcsgx_report_txt
+    fcs_taxonomy        = FCSGX_PARSECSV.out.fcsgx_taxonomy_rpt
+
+    keep_scaffs         = AUTOFILTER_AUTOFILTER.out.keep_scaffs
+    remove_scaffs       = AUTOFILTER_AUTOFILTER.out.remove_scaffolds
+    fcs_tiara_summary   = AUTOFILTER_AUTOFILTER.out.fcs_tiara_summary
+
+    versions            = ch_collated_versions                 // channel: [ path(versions.yml) ]
 }
 
 /*

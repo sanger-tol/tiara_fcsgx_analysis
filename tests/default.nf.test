@@ -83,8 +83,30 @@ nextflow_pipeline {
         then {
             // stable_path: All files + folders in ${params.outdir}/ with a stable path (including file name)
             def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+
             // stable_content: All files in ${params.outdir}/ with stable content
-            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            def stable_content = getAllFilesFromDir(params.outdir, ignore: ['pipeline_info/*.{html,json,txt}', '*.dict', 'fcsgx/*.{txt,rpt}'])
+
+            def get_dict = getAllFilesFromDir(
+                params.outdir,
+                includeDir: true,
+                include: ['*/*.dict']
+            )
+            def dict_first_lines = get_dict.collect { it.readLines()[0] }
+
+            def get_fcsgx = getAllFilesFromDir(
+                params.outdir,
+                include: ['fcsgx/*_report.txt', 'fcsgx/*.rpt']
+            )
+            def fcsgx_first_lines = get_fcsgx.collect { it.readLines()[1] }
+
+            def get_fcs = getAllFilesFromDir(
+                params.outdir,
+                include: ['fcsgx/*.summary.txt']
+            )
+            def fcs_first_lines = get_fcs.collect { it.readLines()[0..10] }
+
+
             assert workflow.success
             assertAll(
                 { assert snapshot(
@@ -93,7 +115,13 @@ nextflow_pipeline {
                     // All stable path name, with a relative path
                     stable_path,
                     // All files with stable contents
-                    stable_content
+                    stable_content,
+                    // All dict files
+                    dict_first_lines,
+                    // FCSGX report.txt and taxonomy.rpt
+                    fcsgx_first_lines,
+                    // FCS summary.txt
+                    fcs_first_lines
                 ).match() }
             )
         }

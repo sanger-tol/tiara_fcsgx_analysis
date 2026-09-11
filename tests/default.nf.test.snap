@@ -33,6 +33,24 @@
                 }
             },
             [
+                "Meles_meles",
+                "Meles_meles/assembly_info",
+                "Meles_meles/assembly_info/Meles_meles.json",
+                "Meles_meles/assembly_info/Meles_meles_dots.fasta",
+                "Meles_meles/assembly_info/Meles_meles_dots.fasta.fai",
+                "Meles_meles/assembly_info/Meles_meles_dots.fasta.sizes",
+                "Meles_meles/fcsgx",
+                "Meles_meles/fcsgx/Meles_meles.fcs_gx_report.txt",
+                "Meles_meles/fcsgx/Meles_meles_dots.fasta.dict",
+                "Meles_meles/fcsgx/Meles_meles_parsed_fcsgx.csv",
+                "Meles_meles/joint_report",
+                "Meles_meles/joint_report/Meles_meles_ABNORMAL_CHECK.csv",
+                "Meles_meles/joint_report/Meles_meles_autofiltered.txt",
+                "Meles_meles/joint_report/Meles_meles_removed_scaffolds.txt",
+                "Meles_meles/tiara",
+                "Meles_meles/tiara/Meles_meles.taxonomy.rpt",
+                "Meles_meles/tiara/Meles_meles.txt",
+                "Meles_meles/tiara/log_Meles_meles.txt",
                 "autofilter",
                 "autofilter/Meles_meles_ABNORMAL_CHECK.csv",
                 "autofilter/Meles_meles_autofiltered.txt",
@@ -58,24 +76,57 @@
                 "tiara/log_Meles_meles.txt"
             ],
             [
+                "Meles_meles.json:md5,2e3bc3e87fdf61f988093b26280d7f4e",
+                "Meles_meles_dots.fasta:md5,bf642f7641c302fdca1f13626c1e58b3",
+                "Meles_meles_dots.fasta.fai:md5,14f65ea617d7f714e88415ab69c16923",
+                "Meles_meles_dots.fasta.sizes:md5,a48b05cfa0feac44240ce45398aa3beb",
+                "Meles_meles.fcs_gx_report.txt:md5,0885a50a73a84a03fd4f9f427fb4977f",
+                "Meles_meles_dots.fasta.dict:md5,a9ecbef6f25125e7d57a50956d2068e7",
+                "Meles_meles_parsed_fcsgx.csv:md5,657503227a9f3bb03e372abdd55b79b4",
                 "Meles_meles_ABNORMAL_CHECK.csv:md5,5598040b3650247c30302eeca194c563",
                 "Meles_meles_autofiltered.txt:md5,8674a2b03ed705ee0f3cd184e4241590",
                 "Meles_meles_removed_scaffolds.txt:md5,68b329da9893e34099c7d8ad5cb9c940",
-                "Meles_meles.fcs_gx_report.txt:md5,20bf56ab45ef895d1c808f2689c2dc39",
-                "Meles_meles.summary.txt:md5,8cdf5410abd6258684f8563b9ef70db5",
-                "Meles_meles.taxonomy.rpt:md5,68ad4ebd580e1c622ab0376b6017cf9c",
+                "Meles_meles.taxonomy.rpt:md5,f01d814043d861428e56ef03e09a5c57",
+                "Meles_meles.txt:md5,9e2a5a00eb12cdfaa54cc555e1a929f2",
+                "log_Meles_meles.txt:md5,ded6e0ea57c26142364f73054ea73a3a",
+                "Meles_meles_ABNORMAL_CHECK.csv:md5,5598040b3650247c30302eeca194c563",
+                "Meles_meles_autofiltered.txt:md5,8674a2b03ed705ee0f3cd184e4241590",
+                "Meles_meles_removed_scaffolds.txt:md5,68b329da9893e34099c7d8ad5cb9c940",
                 "Meles_meles_parsed_fcsgx.csv:md5,657503227a9f3bb03e372abdd55b79b4",
                 "Meles_meles.json:md5,2e3bc3e87fdf61f988093b26280d7f4e",
-                "Meles_meles_dots.fasta.dict:md5,c7fe6ab3890b3f5c8d60408f00d5fd40",
+                "tiara_fcsgx_analysis_software_versions.yml:md5,dcbd3c05e1d241e0f814dc52f94fabc9",
+                "Meles_meles_dots.fasta.dict:md5,a9ecbef6f25125e7d57a50956d2068e7",
                 "Meles_meles_dots.fasta.fai:md5,14f65ea617d7f714e88415ab69c16923",
                 "Meles_meles_dots.fasta.sizes:md5,a48b05cfa0feac44240ce45398aa3beb",
                 "Meles_meles.fasta:md5,608d5d74e61e0b84a2a743a7160e64db",
                 "Meles_meles_dots.fasta:md5,bf642f7641c302fdca1f13626c1e58b3",
                 "Meles_meles.txt:md5,9e2a5a00eb12cdfaa54cc555e1a929f2",
                 "log_Meles_meles.txt:md5,ded6e0ea57c26142364f73054ea73a3a"
+            ],
+            [
+                "@HD\tVN:1.0\tSO:unsorted"
+            ],
+            [
+                "#seq_id\tstart_pos\tend_pos\tseq_len\taction\tdiv\tagg_cont_cov\ttop_tax_name",
+                "#seq-id\tseq-len\t(xp,lc,co,n,mt,pt,pm)-len\tcvg-by-all\tsep1\ttax-name-1\ttax-id-1\tdiv-1\tcvg-by-div-1\tcvg-by-tax-1\tscore-1\tsep2\ttax-id-2\tdiv-2\tcvg-by-div-2\tcvg-by-tax-2\tscore-2\tsep3\ttax-id-3\tdiv-3\tcvg-by-div-3\tcvg-by-tax-3\tscore-3\tsep4\ttax-id-4\tdiv-4\tcvg-by-div-4\tcvg-by-tax-4\tscore-4\tsep5\treserved\tresult\tdiv\tdiv_pct_cvg"
+            ],
+            [
+                [
+                    "",
+                    "-----------------------------------------------------------------------------",
+                    "",
+                    "tax-id    : 9662",
+                    "fasta     : Meles_meles_dots.fasta",
+                    "size      : 7.75 MiB",
+                    "split-fa  : True",
+                    "BLAST-div : carnivores",
+                    "gx-div    : anml:mammals",
+                    "w/same-tax: True",
+                    "bin-dir   : /usr/local/bin"
+                ]
             ]
         ],
-        "timestamp": "2026-09-10T15:57:44.088553843",
+        "timestamp": "2026-09-11T16:06:35.739672438",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

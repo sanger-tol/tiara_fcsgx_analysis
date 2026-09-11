@@ -19,6 +19,7 @@ Initial release of sanger-tol/tiara_fcsgx_analysis, created with the [nf-core](h
     - This includes the `sanger-tol` modules `FCSGX_RUNGX`, `FCSGX_PARSERESULTS` and `AUTOFILTER_AUTOFILTER`
 - `--fcs_gx_database_path` parameter to specify the FCSGX database path
 - `--ncbi_ranked_lineage_path` parameter to specify the NCBI ranked lineage path
+- Adopted the workflow_output system
 
 ### `Dependencies`
 

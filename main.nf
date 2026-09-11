@@ -46,6 +46,24 @@ workflow SANGERTOL_TIARA_FCSGX_ANALYSIS {
         ch_ncbi_path,
         outdir
     )
+
+    emit:
+    index               = TIARA_FCSGX_ANALYSIS.out.index
+    sizes               = TIARA_FCSGX_ANALYSIS.out.sizes
+    fasta               = TIARA_FCSGX_ANALYSIS.out.fasta
+    seq_desc            = TIARA_FCSGX_ANALYSIS.out.seq_desc
+
+    classifications     = TIARA_FCSGX_ANALYSIS.out.classifications
+    tiara_logs          = TIARA_FCSGX_ANALYSIS.out.tiara_logs
+
+    fcs_results         = TIARA_FCSGX_ANALYSIS.out.fcs_results
+    fcs_genomedict      = TIARA_FCSGX_ANALYSIS.out.fcs_genomedict
+    fcs_report_txt      = TIARA_FCSGX_ANALYSIS.out.fcs_report_txt
+    fcs_taxonomy        = TIARA_FCSGX_ANALYSIS.out.fcs_taxonomy
+
+    keep_scaffs         = TIARA_FCSGX_ANALYSIS.out.keep_scaffs
+    remove_scaffs       = TIARA_FCSGX_ANALYSIS.out.remove_scaffs
+    fcs_tiara_summary   = TIARA_FCSGX_ANALYSIS.out.fcs_tiara_summary
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,6 +113,66 @@ workflow {
         params.outdir,
         params.monochrome_logs,
     )
+
+    publish:
+    index               = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.index
+    sizes               = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.sizes
+    fasta               = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fasta
+    seq_desc            = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.seq_desc
+
+    classifications     = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.classifications
+    tiara_logs          = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.tiara_logs
+
+    fcs_results         = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fcs_results
+    fcs_genomedict      = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fcs_genomedict
+    fcs_report_txt      = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fcs_report_txt
+    fcs_taxonomy        = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fcs_taxonomy
+
+    keep_scaffs         = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.keep_scaffs
+    remove_scaffs       = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.remove_scaffs
+    fcs_tiara_summary   = SANGERTOL_TIARA_FCSGX_ANALYSIS.out.fcs_tiara_summary
+}
+
+output {
+    index {
+        path { meta, file -> "${meta.id}/assembly_info/"}
+    }
+    sizes {
+        path { meta, file -> "${meta.id}/assembly_info/"}
+    }
+    fasta {
+        path { meta, file -> "${meta.id}/assembly_info/"}
+    }
+    seq_desc {
+        path { meta, file -> "${meta.id}/assembly_info/"}
+    }
+    classifications {
+        path { meta, file -> "${meta.id}/tiara/"}
+    }
+    tiara_logs {
+        path { meta, file -> "${meta.id}/tiara/"}
+    }
+    fcs_results {
+        path { meta, file -> "${meta.id}/fcsgx/"}
+    }
+    fcs_genomedict {
+        path { meta, file -> "${meta.id}/fcsgx/"}
+    }
+    fcs_report_txt {
+        path { meta, file -> "${meta.id}/fcsgx/"}
+    }
+    fcs_taxonomy {
+        path { meta, file -> "${meta.id}/tiara/"}
+    }
+    keep_scaffs {
+        path { meta, file -> "${meta.id}/joint_report/"}
+    }
+    remove_scaffs {
+        path { meta, file -> "${meta.id}/joint_report/"}
+    }
+    fcs_tiara_summary {
+        path { meta, file -> "${meta.id}/joint_report/"}
+    }
 }
 
 /*
