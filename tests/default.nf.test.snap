@@ -29,7 +29,7 @@
                     "tiara": "1.0.3"
                 },
                 "Workflow": {
-                    "sanger-tol/tiara_fcsgx_analysis": "v0.1.0dev"
+                    "sanger-tol/tiara_fcsgx_analysis": "v0.1.0"
                 }
             },
             [
@@ -63,9 +63,7 @@
                 "Meles_meles_ABNORMAL_CHECK.csv:md5,5598040b3650247c30302eeca194c563",
                 "Meles_meles_autofiltered.txt:md5,8674a2b03ed705ee0f3cd184e4241590",
                 "Meles_meles_removed_scaffolds.txt:md5,68b329da9893e34099c7d8ad5cb9c940",
-                "Meles_meles.txt:md5,9e2a5a00eb12cdfaa54cc555e1a929f2",
-                "log_Meles_meles.txt:md5,ded6e0ea57c26142364f73054ea73a3a",
-                "tiara_fcsgx_analysis_software_versions.yml:md5,dcbd3c05e1d241e0f814dc52f94fabc9"
+                "Meles_meles.txt:md5,9e2a5a00eb12cdfaa54cc555e1a929f2"
             ],
             [
                 "@HD\tVN:1.0\tSO:unsorted"
@@ -83,9 +81,12 @@
                     "\teukarya: 1",
                     ""
                 ]
+            ],
+            [
+                
             ]
         ],
-        "timestamp": "2026-09-14T14:20:56.171471158",
+        "timestamp": "2026-09-14T16:30:04.414849919",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

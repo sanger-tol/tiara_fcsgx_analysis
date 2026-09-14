@@ -88,7 +88,7 @@ nextflow_pipeline {
             def stable_content = getAllFilesFromDir(
                 params.outdir,
                 ignore: [
-                    'pipeline_info/*.{html,json,txt}',
+                    'pipeline_info/*.{html,json,txt,yml}',
                     '*/fcsgx/*.{txt,rpt,dict}',
                     '*/fcsgx/*.summary.txt',
                     '*/fcsgx/*.dict',
@@ -124,7 +124,15 @@ nextflow_pipeline {
             def fcs_first_lines = get_fcs.collect { it.readLines()[0..9] }
 
 
+            def version_file = getAllFilesFromDir(
+                params.outdir,
+                include: [
+                    'pipeline_info/fastk_genome_statistics_software_versions.yml'
+                ]
+            )
 
+            def version_data = version_file
+                .collect { it.readLines()[0..-2] }
 
             assert workflow.success
             assertAll(
@@ -142,7 +150,8 @@ nextflow_pipeline {
                     // FCS summary.txt
                     fcs_first_lines,
                     // Tiara log
-                    tiara_log_first_lines
+                    tiara_log_first_lines,
+                    version_data
                 ).match() }
             )
         }
