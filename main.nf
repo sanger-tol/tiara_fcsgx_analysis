@@ -162,7 +162,7 @@ output {
         path { meta, file -> "${meta.id}/fcsgx/"}
     }
     fcs_taxonomy {
-        path { meta, file -> "${meta.id}/tiara/"}
+        path { meta, file -> "${meta.id}/fcsgx/"}
     }
     keep_scaffs {
         path { meta, file -> "${meta.id}/joint_report/"}

@@ -85,26 +85,45 @@ nextflow_pipeline {
             def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
 
             // stable_content: All files in ${params.outdir}/ with stable content
-            def stable_content = getAllFilesFromDir(params.outdir, ignore: ['pipeline_info/*.{html,json,txt}', '*.dict', 'fcsgx/*.{txt,rpt}'])
+            def stable_content = getAllFilesFromDir(
+                params.outdir,
+                ignore: [
+                    'pipeline_info/*.{html,json,txt}',
+                    '*/fcsgx/*.{txt,rpt,dict}',
+                    '*/fcsgx/*.summary.txt',
+                    '*/fcsgx/*.dict',
+                    '*/tiara/log_Meles_meles.txt'
+                ]
+            )
 
             def get_dict = getAllFilesFromDir(
                 params.outdir,
                 includeDir: true,
-                include: ['*/*.dict']
+                include: ['*/fcsgx/*.dict']
             )
             def dict_first_lines = get_dict.collect { it.readLines()[0] }
 
             def get_fcsgx = getAllFilesFromDir(
                 params.outdir,
-                include: ['fcsgx/*_report.txt', 'fcsgx/*.rpt']
+                include: ['*/fcsgx/*_report.txt', '*/fcsgx/*.rpt']
             )
             def fcsgx_first_lines = get_fcsgx.collect { it.readLines()[1] }
 
+            def get_tiara_log = getAllFilesFromDir(
+                params.outdir,
+                include: ['*/tiara/log_Meles_meles.txt']
+            )
+            def tiara_log_first_lines = get_tiara_log.collect { it.readLines()[0..2] }
+
+            // FOR TESTS WE EXPECT THIS TO BE EMPTY
+            // SUMMARY FILES ONLY PRODUCED ONCE IT FINDS CONTAMINATION
             def get_fcs = getAllFilesFromDir(
                 params.outdir,
-                include: ['fcsgx/*.summary.txt']
+                include: ['*/fcsgx/*.summary.txt']
             )
-            def fcs_first_lines = get_fcs.collect { it.readLines()[0..10] }
+            def fcs_first_lines = get_fcs.collect { it.readLines()[0..9] }
+
+
 
 
             assert workflow.success
@@ -121,7 +140,9 @@ nextflow_pipeline {
                     // FCSGX report.txt and taxonomy.rpt
                     fcsgx_first_lines,
                     // FCS summary.txt
-                    fcs_first_lines
+                    fcs_first_lines,
+                    // Tiara log
+                    tiara_log_first_lines
                 ).match() }
             )
         }
