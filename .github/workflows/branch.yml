@@ -17,7 +17,7 @@ jobs:
       - name: Check PRs
         if: github.repository == 'sanger-tol/tiara_fcsgx_analysis'
         env:
-          HEAD_REPO:  ${{ github.event.pull_request.head.repo.full_name }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
           { [[ "$HEAD_REPO" == sanger-tol/tiara_fcsgx_analysis ]] && [[ $GITHUB_HEAD_REF == "dev" ]]; } || [[ $GITHUB_HEAD_REF == "patch" ]]
 

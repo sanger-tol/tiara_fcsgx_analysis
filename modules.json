@@ -5,10 +5,45 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "gunzip": {
+                        "branch": "master",
+                        "git_sha": "0902eac3012baaf4f9ab6513c8c55acc9353c96c",
+                        "installed_by": ["fasta_clean_faidx"]
+                    },
+                    "samtools/dict": {
+                        "branch": "master",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
+                        "installed_by": ["fasta_clean_faidx", "fcsgx_parsecsv"]
+                    },
+                    "samtools/faidx": {
+                        "branch": "master",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
+                        "installed_by": ["fasta_clean_faidx"]
+                    },
+                    "seqkit/replace": {
+                        "branch": "master",
+                        "git_sha": "d07a945f421a4a91ce4e5a22db63e0e7f8741607",
+                        "installed_by": ["fasta_clean_faidx"]
+                    },
+                    "seqkit/seq": {
+                        "branch": "master",
+                        "git_sha": "d07a945f421a4a91ce4e5a22db63e0e7f8741607",
+                        "installed_by": ["fasta_clean_faidx"]
+                    },
+                    "tiara/tiara": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    }
                 }
             },
             "subworkflows": {
                 "nf-core": {
+                    "fasta_clean_faidx": {
+                        "branch": "master",
+                        "git_sha": "6b73b7eeb9f260f43230439a2d9be4ea9a05f83b",
+                        "installed_by": ["subworkflows"]
+                    },
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
@@ -22,6 +57,36 @@
                     "utils_nfschema_plugin": {
                         "branch": "master",
                         "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
+                        "installed_by": ["subworkflows"]
+                    }
+                }
+            }
+        },
+        "https://github.com/sanger-tol/nf-core-modules": {
+            "modules": {
+                "sanger-tol": {
+                    "autofilter/autofilter": {
+                        "branch": "main",
+                        "git_sha": "e2f599ca20193ea02584c07ff399c3c1de38888d",
+                        "installed_by": ["modules"]
+                    },
+                    "fcsgx/parseresults": {
+                        "branch": "main",
+                        "git_sha": "17d7d065459873b60bb795714fac19137304b793",
+                        "installed_by": ["fcsgx_parsecsv"]
+                    },
+                    "fcsgx/rungx": {
+                        "branch": "main",
+                        "git_sha": "864e75dc4bf5b4fc50f7a5e568a4cb6236bfb528",
+                        "installed_by": ["fcsgx_parsecsv"]
+                    }
+                }
+            },
+            "subworkflows": {
+                "sanger-tol": {
+                    "fcsgx_parsecsv": {
+                        "branch": "main",
+                        "git_sha": "e9d4acfa1e146cef4169c05b952bb1ce34326a1d",
                         "installed_by": ["subworkflows"]
                     }
                 }

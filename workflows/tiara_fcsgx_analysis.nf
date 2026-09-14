@@ -3,6 +3,11 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { FASTA_CLEAN_FAIDX      } from '../subworkflows/nf-core/fasta_clean_faidx/main'
+include { TIARA_TIARA            } from '../modules/nf-core/tiara/tiara/main'
+include { FCSGX_PARSECSV         } from '../subworkflows/sanger-tol/fcsgx_parsecsv/main'
+include { AUTOFILTER_AUTOFILTER  } from '../modules/sanger-tol/autofilter/autofilter/main'
+
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_tiara_fcsgx_analysis_pipeline'
@@ -16,12 +21,62 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_tiar
 workflow TIARA_FCSGX_ANALYSIS {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_fasta
+    val_taxid
+    ch_fcsgx_db
+    ch_ncbi_path
     outdir
 
     main:
 
     def ch_versions = channel.empty()
+
+
+    //
+    // MODULE: GUNZIP, UPPERCASE SEQUENCE, CLEAN HEADERRS
+    //
+    FASTA_CLEAN_FAIDX (
+        ch_fasta,
+        true,
+        false
+    )
+
+
+    //
+    // MODULE: RUN TIARA FOR SEQUENCE CLASSIFICATION
+    //
+    TIARA_TIARA (
+        FASTA_CLEAN_FAIDX.out.reference
+    )
+
+
+    //
+    // SUBWORKFLOW: RUN FCSGX AND PARSE INTO CSV
+    //
+    reference_taxid = FASTA_CLEAN_FAIDX.out.reference
+        .map { meta, ref ->
+            def new_meta = meta + [ taxid: val_taxid ]
+            tuple(new_meta, ref)
+        }
+
+    FCSGX_PARSECSV (
+        reference_taxid,
+        ch_fcsgx_db,
+        ch_ncbi_path
+    )
+
+
+    //
+    // SUBWORKFLOW: GENERATE TIARA/FCSGX JOINT REPORT
+    //
+    AUTOFILTER_AUTOFILTER (
+        FASTA_CLEAN_FAIDX.out.fai,
+        TIARA_TIARA.out.classifications,
+        FCSGX_PARSECSV.out.fcsgxresult,
+        val_taxid,
+        ch_ncbi_path
+    )
+
 
     //
     // Collate and save software versions
@@ -52,7 +107,24 @@ workflow TIARA_FCSGX_ANALYSIS {
             newLine: true
         )
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    index               = FASTA_CLEAN_FAIDX.out.fai
+    sizes               = FASTA_CLEAN_FAIDX.out.sizes
+    fasta               = FASTA_CLEAN_FAIDX.out.reference
+    seq_desc            = FASTA_CLEAN_FAIDX.out.sequence_description
+
+    classifications     = TIARA_TIARA.out.classifications
+    tiara_logs          = TIARA_TIARA.out.log
+
+    fcs_results         = FCSGX_PARSECSV.out.fcsgxresult
+    fcs_genomedict      = FCSGX_PARSECSV.out.genomedict
+    fcs_report_txt      = FCSGX_PARSECSV.out.fcsgx_report_txt
+    fcs_taxonomy        = FCSGX_PARSECSV.out.fcsgx_taxonomy_rpt
+
+    keep_scaffs         = AUTOFILTER_AUTOFILTER.out.keep_scaffs
+    remove_scaffs       = AUTOFILTER_AUTOFILTER.out.remove_scaffolds
+    fcs_tiara_summary   = AUTOFILTER_AUTOFILTER.out.fcs_tiara_summary
+
+    versions            = ch_collated_versions                 // channel: [ path(versions.yml) ]
 }
 
 /*
